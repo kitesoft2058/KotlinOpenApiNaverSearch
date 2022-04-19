@@ -3,6 +3,8 @@ package com.kitesoft.kotlinopenapinaversearch
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.KeyEvent
+import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -21,6 +23,12 @@ class MainActivity : AppCompatActivity() {
         //setContentView(R.layout.activity_main)
         setContentView(binding.root)
         binding.btnSearch.setOnClickListener { searchData() }
+        binding.et.setOnEditorActionListener { textView, actionId, keyEvent ->
+            when(actionId){
+                EditorInfo.IME_ACTION_SEARCH-> searchData()
+            }
+            true
+        }
     }
 
     fun searchData(){
