@@ -5,6 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.text.HtmlCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.kitesoft.kotlinopenapinaversearch.databinding.RecyclerItemBinding
@@ -16,8 +17,11 @@ class MyAdapter(val context: Context, var items:MutableList<ShoppingItem>) : Rec
     }
 
     override fun onBindViewHolder(holder: VH, position: Int) {
-        holder.binding.tvTitle.setText(items[position].title)
-        holder.binding.tvLowPrice.setText(items[position].lprice)
+
+        var title= HtmlCompat.fromHtml(items[position].title, HtmlCompat.FROM_HTML_MODE_COMPACT)
+        holder.binding.tvTitle.setText(title)
+
+        holder.binding.tvLowPrice.setText("${items[position].lprice}원")
         holder.binding.tvBrand.setText(items[position].brand)
         Glide.with(context).load(items[position].image).error(R.drawable.g_07).into(holder.binding.iv)
 
